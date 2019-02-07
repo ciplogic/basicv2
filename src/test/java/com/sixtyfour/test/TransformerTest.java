@@ -47,7 +47,7 @@ public class TransformerTest {
 //		 testTransformerFractal();
 		// testTransformer6();
 		// testTransformer7();
-//		 testTransformerPrime();
+		 testTransformerPrime();
 		// testTransformerSqr();
 		// testTransformer8();
 		// testTransformer9();
@@ -97,9 +97,29 @@ public class TransformerTest {
 //		testIfTest();
 	    	//testRunner();
 	    	//testIfNotTest();
-	    	testGcTest();
+	    	//testGcTest();
+	    	//testSprites();
+	    	testHidden();
 	}
 
+	private static void testHidden() throws Exception {
+		System.out.println("\n\ntestHidden");
+		String[] vary = Loader.loadProgram("src/test/resources/transform/hidden.bas");
+		Assembler assy = initTestEnvironment(vary, false);
+		FileWriter.writeAsPrg(assy.getProgram(), path + "++hidden.prg", true);
+		
+		vary = Loader.loadProgram("src/test/resources/transform/hidden_asm.bas");
+		assy = initTestEnvironment(vary, false);
+		FileWriter.writeAsPrg(assy.getProgram(), path + "++hidden_asm.prg", true);
+	}
+	
+	private static void testSprites() throws Exception {
+		System.out.println("\n\ntestSprites");
+		String[] vary = Loader.loadProgram("src/test/resources/transform/sprites.bas");
+		Assembler assy = initTestEnvironment(vary, false);
+		FileWriter.writeAsPrg(assy.getProgram(), path + "++sprites.prg", true);
+	}
+	
 	private static void testGcTest() throws Exception {
 		System.out.println("\n\ntestGcTest");
 		String[] vary = Loader.loadProgram("src/test/resources/transform/gctest.bas");

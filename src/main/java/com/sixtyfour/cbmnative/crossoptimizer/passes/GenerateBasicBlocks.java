@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
  * 150 GOTO 10
  *
  */
-public class GenerateBasicBlocks {
+public class GenerateBasicBlocks implements HighLevelOptimizer {
 
     private static class Analysis {
         public SortedSet<Integer> rowsWithGotoTarget = new TreeSet<>();
@@ -48,10 +48,6 @@ public class GenerateBasicBlocks {
             for (int jumpTarget : onStatement.getLineNumbers()) {
                 rowsWithGotoTarget.add(jumpTarget);
             }
-        }
-        public void addData(int currentRow) {
-            rowsWithGotoTarget.add(currentRow);
-            rowsWithJumps.add(currentRow);
         }
 
         public void addStatement(Gosub gotoStatement) {
@@ -161,8 +157,8 @@ public class GenerateBasicBlocks {
     }
 
     private void analyze(OrderedPCode orderedPCode) {
-        PCodeVisitor visitor = new PCodeVisitor();
-        visitor.accept(orderedPCode, (line, command, index) -> {
+        PCodeVisitor visitor = new PCodeVisitor(orderedPCode);
+        visitor.accept((line, command, index) -> {
             if (command instanceof End) {
                 analysis.rowsWithJumps.add(line.getNumber());
                 return;

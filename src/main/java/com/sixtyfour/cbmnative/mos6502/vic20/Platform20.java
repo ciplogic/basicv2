@@ -1,4 +1,4 @@
-package com.sixtyfour.cbmnative.mos6502.c64;
+package com.sixtyfour.cbmnative.mos6502.vic20;
 
 import com.sixtyfour.cbmnative.Optimizer;
 import com.sixtyfour.cbmnative.PlatformProvider;
@@ -8,21 +8,21 @@ import com.sixtyfour.cbmnative.mos6502.Optimizer6502;
 import com.sixtyfour.cbmnative.mos6502.Unlinker6502;
 
 /**
- * A PlatformProvider implementation for the C64 target platform.
+ * A PlatformProvider implementation for the VIC20 target platform.
  * 
  * @author EgonOlsen
  *
  */
-public class Platform64 implements PlatformProvider {
+public class Platform20 implements PlatformProvider {
 
 	@Override
 	public int getStackSize() {
-		return 20;
+		return 10;
 	}
 
 	@Override
 	public int getForStackSize() {
-		return 20;
+		return 10;
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class Platform64 implements PlatformProvider {
 
 	@Override
 	public Transformer getTransformer() {
-		return new Transformer64();
+		return new Transformer20();
 	}
 
 	@Override
@@ -47,11 +47,11 @@ public class Platform64 implements PlatformProvider {
 
 	@Override
 	public int getMaxHeaderAddress() {
-	    return 2100;
+	    return 4660;
 	}
 
 	@Override
 	public int getBaseAddress() {
-	    return 2049;
+	    return 4609;
 	}
 }
